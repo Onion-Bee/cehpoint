@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Welcome to CEHPOINT{% endblock %}
+
+{% block content %}
+<div class="row align-items-center justify-content-center min-vh-75">
+    <div class="col-md-8 text-center">
+        <h1 class="display-4 mb-4">Welcome to CEHPOINT</h1>
+        <p class="lead mb-5">A secure and modern authentication system</p>
+        
+        {% if not user.is_authenticated %}
+            <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
+                <a href="{% url 'login' %}" class="btn btn-primary btn-lg px-4 me-sm-3">Login</a>
+                <a href="{% url 'signup' %}" class="btn btn-outline-primary btn-lg px-4">Sign Up</a>
+            </div>
+        {% else %}
+            <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
+                <a href="{% url 'dashboard' %}" class="btn btn-primary btn-lg px-4">Go to Dashboard</a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <h3 class="card-title">Secure</h3>
+                <p class="card-text">Built with Django's robust authentication system, ensuring your data stays safe.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <h3 class="card-title">Modern</h3>
+                <p class="card-text">Clean, responsive design that works beautifully on all devices.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <h3 class="card-title">Simple</h3>
+                <p class="card-text">Easy to use interface with intuitive navigation and clear actions.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

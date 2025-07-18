@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title">Welcome, {{ user.username }}!</h2>
+                <p class="card-text">This is your personal dashboard. You've successfully logged in to your account.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Profile Overview</h5>
+                <p class="card-text">
+                    <strong>Username:</strong> {{ user.username }}<br>
+                    <strong>Email:</strong> {{ user.email|default:"Not provided" }}<br>
+                    <strong>Date Joined:</strong> {{ user.date_joined|date:"F j, Y" }}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Recent Activity</h5>
+                <p class="card-text">
+                    Your recent activity will be displayed here.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
