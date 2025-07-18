@@ -1,41 +1,109 @@
 {% extends 'base.html' %}
 
-{% block title %}Dashboard{% endblock %}
+{% block title %}Dashboard - {{ company.company_name }}{% endblock %}
 
 {% block content %}
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h2 class="card-title">Welcome, {{ user.username }}!</h2>
-                <p class="card-text">This is your personal dashboard. You've successfully logged in to your account.</p>
+                <h2 class="card-title">Welcome {{ company.company_name }}!</h2>
+                <p class="card-text">{{ company.company_description }}</p>
             </div>
         </div>
     </div>
 </div>
 
 <div class="row mt-4">
-    <div class="col-md-4">
+    <div class="col-md-6">
         <div class="card h-100">
             <div class="card-body">
-                <h5 class="card-title">Profile Overview</h5>
-                <p class="card-text">
-                    <strong>Username:</strong> {{ user.username }}<br>
-                    <strong>Email:</strong> {{ user.email|default:"Not provided" }}<br>
-                    <strong>Date Joined:</strong> {{ user.date_joined|date:"F j, Y" }}
-                </p>
+                <h5 class="card-title">Company Information</h5>
+                <div class="table-responsive">
+                    <table class="table table-borderless">
+                        <tr>
+                            <th>Location:</th>
+                            <td>{{ company.headquarters_location }}</td>
+                        </tr>
+                        <tr>
+                            <th>Website:</th>
+                            <td><a href="{{ company.company_url }}" target="_blank">{{ company.company_url }}</a></td>
+                        </tr>
+                        <tr>
+                            <th>Email:</th>
+                            <td>{{ company.company_email }}</td>
+                        </tr>
+                        <tr>
+                            <th>Employees:</th>
+                            <td>{{ company.get_number_of_employees_display }}</td>
+                        </tr>
+                        <tr>
+                            <th>Turnover:</th>
+                            <td>{{ company.get_turnover_display }}</td>
+                        </tr>
+                        <tr>
+                            <th>Industry:</th>
+                            <td>{{ company.get_industry_type_display }}</td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-6">
         <div class="card h-100">
             <div class="card-body">
-                <h5 class="card-title">Recent Activity</h5>
-                <p class="card-text">
-                    Your recent activity will be displayed here.
-                </p>
+                <h5 class="card-title">Contact Information</h5>
+                <div class="table-responsive">
+                    <table class="table table-borderless">
+                        <tr>
+                            <th>Contact Person:</th>
+                            <td>{{ company.contact_person_name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Position:</th>
+                            <td>{{ company.contact_person_position }}</td>
+                        </tr>
+                        <tr>
+                            <th>Phone:</th>
+                            <td>{{ company.phone_number }}</td>
+                        </tr>
+                        <tr>
+                            <th>Registration No:</th>
+                            <td>{{ company.registration_number }}</td>
+                        </tr>
+                        <tr>
+                            <th>Established:</th>
+                            <td>{{ company.year_established }}</td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+{% if company.social_media_linkedin or company.social_media_twitter %}
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Social Media</h5>
+                <div class="d-flex gap-3">
+                    {% if company.social_media_linkedin %}
+                        <a href="{{ company.social_media_linkedin }}" target="_blank" class="btn btn-outline-primary">
+                            LinkedIn Profile
+                        </a>
+                    {% endif %}
+                    {% if company.social_media_twitter %}
+                        <a href="{{ company.social_media_twitter }}" target="_blank" class="btn btn-outline-info">
+                            Twitter Profile
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
 {% endblock %} 

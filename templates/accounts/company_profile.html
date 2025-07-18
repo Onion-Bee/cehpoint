@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block title %}Company Profile - CEHPOINT{% endblock %}
+
+{% block content %}
+<!-- Success Modal -->
+<div class="modal fade" id="rewardModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="rewardModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content reward-modal">
+            <div class="modal-body p-0">
+                <div class="reward-header text-center p-5">
+                    <h1 class="elegant-title mb-0">Congratulations!</h1>
+                </div>
+                <div class="text-center p-5">
+                    <div class="reward-content">
+                        <h2 class="mb-4 text-muted">You've Won</h2>
+                        <div class="reward-amount">₹100</div>
+                        <h3 class="text-success mt-4">Paytm Cash Reward</h3>
+                        <p class="text-muted mt-4">Your reward will be processed shortly</p>
+                        <a href="{% url 'dashboard' %}" class="btn btn-elegant mt-4">
+                            Continue to Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Form Content -->
+<div class="row justify-content-center {% if show_reward %}d-none{% endif %}">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4">Complete Your Company Profile</h2>
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            {% bootstrap_field form.company_name %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            {% bootstrap_field form.company_url %}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            {% bootstrap_field form.headquarters_location %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            {% bootstrap_field form.company_email %}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            {% bootstrap_field form.number_of_employees %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            {% bootstrap_field form.turnover %}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            {% bootstrap_field form.industry_type %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            {% bootstrap_field form.year_established %}
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        {% bootstrap_field form.company_description %}
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            {% bootstrap_field form.registration_number %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            {% bootstrap_field form.phone_number %}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            {% bootstrap_field form.contact_person_name %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            {% bootstrap_field form.contact_person_position %}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            {% bootstrap_field form.social_media_linkedin %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            {% bootstrap_field form.social_media_twitter %}
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg">Complete Profile</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if show_reward %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var modal = new bootstrap.Modal(document.getElementById('rewardModal'), {
+            backdrop: 'static',
+            keyboard: false
+        });
+        modal.show();
+    });
+</script>
+{% endif %}
+
+<style>
+.reward-modal {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    background: #ffffff;
+}
+
+.reward-header {
+    background: linear-gradient(to right, #f8f9fa, #ffffff);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.elegant-title {
+    font-family: 'Georgia', serif;
+    font-size: 3.5rem;
+    color: #2c3e50;
+    font-weight: normal;
+}
+
+.reward-content {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.reward-amount {
+    font-family: 'Georgia', serif;
+    font-size: 5rem;
+    color: #2c3e50;
+    font-weight: bold;
+    margin: 2rem 0;
+    letter-spacing: -2px;
+}
+
+.btn-elegant {
+    background-color: #2c3e50;
+    color: white;
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    border-radius: 50px;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-elegant:hover {
+    background-color: #34495e;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+h2, h3 {
+    font-family: 'Georgia', serif;
+    font-weight: normal;
+}
+
+.text-muted {
+    color: #6c757d !important;
+}
+</style>
+{% endblock %} 
